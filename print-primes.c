@@ -8,25 +8,42 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define COLUMNS 6
+int nCols = COLUMNS; // init counter to keep track of cols in print_number
 
+void print_number(int n){
+  printf("%10d", n);
+  nCols--;
+
+  if(nCols == 0) {
+    nCols = COLUMNS;
+    printf("\n");
+  }
+}
+
+int is_prime(int n){
+    int i;
+    for(i=2; i<=sqrt(n); i++) {
+        if(n%i == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
 void print_primes(int n){
   // Should print out all prime numbers less than 'n'
   // with the following formatting. Note that
   // the number of columns is stated in the define
   // COLUMNS
-
-  printf("%10d ", 2);
-  printf("%10d ", 3);
-  printf("%10d ", 5);
-  printf("%10d ", 7);
-  printf("%10d ", 11);
-  printf("%10d ", 13);
-  printf("\n");
-  printf("%10d ", 17);
-  printf("%10d ", 19);
+  int i;
+  for(i=2; i<=n; i++) {
+    if (is_prime(i)) {
+      print_number(i);
+    }
+  }
 
   printf("\n");
 }
@@ -41,5 +58,3 @@ int main(int argc, char *argv[]){
     printf("Please state an interger number.\n");
   return 0;
 }
-
- 
