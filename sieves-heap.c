@@ -22,24 +22,26 @@ void print_sieves(int n){
     // the number of columns is stated in the define
     // COLUMNS
 
-    int a[n]; // init array with indices 0 -> n
-    for(int i = 0; i < n ; i++){  //fill array with 1
+    char *a = malloc(n);
+
+    //int a[n+1]; // init array with indices 0 -> n
+    for(int i = 0; i <= n ; i++){  //fill array with 1
         a[i] = 1;
     }
     for(int i = 2; i*i <= n; i++){ //start at 2, increment i until it equals the sqrt of n
-        if(a[i-1] == 1) { //if i-1 = 1 then i is prime
-            for(int j=i*2; j<=n; j+=i){ //start filling zeros for the lowest i multiple, then increment with i.
-                a[j-1]=0;
+        if(a[i] == 1) { //if i = 1 then it is prime
+            for(int j=i*2; j<=n; j+=i){ //start filling zeros for the lowest multiple, then increment with i.
+                a[j]=0;
             }
         }
     }
 
-    for(int i = 1; i < n; i++){
+    for(int i = 2; i <=n; i++){
         if(a[i] == 1) {
-            print_number(i+1); //indices are shifted left 1
+            print_number(i);
         }
     }
-
+    free(a);
     printf("\n");
 }
 
